@@ -39,6 +39,7 @@ void setup()
 
   // color Scenes and Patterns
   colorScenes = new ArrayList<Scene>();
+  colorScenes.add(new ExampleScene());
   colorScenes.add(new HSVColorScene());
 
   patternScenes = new ArrayList<Scene>();
