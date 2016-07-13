@@ -33,6 +33,21 @@ class FadeColor
     this.target = colorToVector(t);
   }
   
+  public void fadeH(int h, float easing)
+  {
+      
+  }
+  
+  public void fadeS(int s, float easing)
+  {
+      
+  }
+  
+  public void fadeB(int b, float easing)
+  {
+      
+  }
+  
   public color getColor()
   {
      return vectorToColor(current); 
@@ -40,7 +55,7 @@ class FadeColor
   
   private PVector colorToVector(color c)
   {
-    return new PVector(red(c), green(c), blue(c));
+    return new PVector(hue(c), saturation(c), brightness(c));
   } 
   
   private color vectorToColor(PVector v)

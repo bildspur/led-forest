@@ -28,7 +28,6 @@ class WavingPatternScene extends Scene
     if(activeLayer >= layerCount)
     {
        activeLayer = 23;
-       //addValue *= 1;
     }
   }
   

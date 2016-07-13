@@ -8,8 +8,6 @@ class HSVColorScene extends Scene
     if (frameCount % 60 != 0)
       return;
 
-    colorMode(HSB, 360, 100, 100);
-
     for (int j = 0; j < tubes.size(); j++)
     {
       Tube t =  tubes.get(j);
@@ -19,8 +17,6 @@ class HSVColorScene extends Scene
         t.leds.get(i).c.fade(c, 0.01);
       }
     }
-    
-    colorMode(RGB);
     
     h = h > 360 ? 0 : h + 20;
   }

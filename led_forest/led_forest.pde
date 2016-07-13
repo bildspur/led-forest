@@ -24,6 +24,7 @@ void setup()
   // settings
   ellipseMode(CENTER);
   frameRate(60);
+  colorMode(HSB, 360, 100, 100);
 
   // setup tubes
   createTubes(16, 24);
@@ -101,7 +102,7 @@ void createTubes(int tubeCount, int ledCount)
     for (int j = 0; j < ledCount; j++)
     {
       colorShift += 10;
-      LED led = new LED(address, color(100, 100 + colorShift, 255));
+      LED led = new LED(address, color(100 + colorShift, 100, 100));
       t.leds.add(led);
 
       address += 3;
@@ -128,7 +129,7 @@ void keyPressed() {
     break;
 
   case ' ':
-    color c = color(random(0, 255), random(0, 255), random(0, 255));
+    color c = color(random(0, 360), random(0, 100), random(0, 100));
     for (int i = 0; i < tubes.get(0).leds.size(); i++)
     {
       tubes.get(0).leds.get(i).c.fade(c, 0.05);
@@ -146,8 +147,8 @@ void keyPressed() {
 
 void setRandomColor()
 {
-  color c = color(random(0, 255), random(0, 255), random(0, 255));
-  println("Random Color: " + red(c) + ", " + green(c) + ", " + blue(c));
+  color c = color(random(0, 360), random(0, 100), random(0, 100));
+  println("Random Color: " + hue(c) + ", " + saturation(c) + ", " + brightness(c));
   for (int j = 0; j < tubes.size(); j++)
   {
     for (int i = 0; i < tubes.get(j).leds.size(); i++)
