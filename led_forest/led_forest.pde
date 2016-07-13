@@ -101,8 +101,8 @@ void createTubes(int tubeCount, int ledCount)
 
     for (int j = 0; j < ledCount; j++)
     {
-      colorShift += 10;
-      LED led = new LED(address, color(100 + colorShift, 100, 100));
+      colorShift += 5;
+      LED led = new LED(address, color(200 + colorShift, 100, 100));
       t.leds.add(led);
 
       address += 3;

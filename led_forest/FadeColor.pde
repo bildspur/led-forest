@@ -2,8 +2,7 @@ class FadeColor
 {
   PVector current = new PVector();
   PVector target = new PVector();
-  
-  float easing = 0.05;
+  PVector easingVector = new PVector();
   
   public FadeColor()
   {
@@ -18,7 +17,11 @@ class FadeColor
   public void update()
   {
     PVector delta = target.copy().sub(current);
-    current.add(delta.mult(easing));
+    
+    // no matrix multiplication possible
+    current.x += delta.x * easingVector.x;
+    current.y += delta.y * easingVector.y;
+    current.z += delta.z * easingVector.z;
   }
   
   public void setColor(color c)
@@ -29,23 +32,26 @@ class FadeColor
   
   public void fade(color t, float easing)
   {
-    this.easing = easing;
+    easingVector = new PVector(easing, easing, easing);
     this.target = colorToVector(t);
   }
   
-  public void fadeH(int h, float easing)
+  public void fadeH(float h, float easing)
   {
-      
+      easingVector.x = easing;
+      target.x = h;
   }
   
-  public void fadeS(int s, float easing)
+  public void fadeS(float s, float easing)
   {
-      
+      easingVector.y = easing;
+      target.y = s;
   }
   
-  public void fadeB(int b, float easing)
+  public void fadeB(float b, float easing)
   {
-      
+      easingVector.z = easing;
+      target.z = b;
   }
   
   public color getColor()

@@ -2,21 +2,23 @@ class WavingPatternScene extends Scene
 {
   int layerCount = 24;
   int activeLayer = 23;
-  int lastLayer = 23;
   int addValue = -1;
   
-  float fadeValue = 0.1;
+  int trace = 15;
+  
+  float fadeValue = 0.3;
 
   public void update()
   {
     // do something every second
-    if (frameCount % 10 != 0)
+    if (frameCount % 5 != 0)
       return;
     
-    setLayer(lastLayer, color(0));
-    setLayer(activeLayer, color(255));
+    for(int i = 0; i < trace; i++)
+    {
+        setLayer((activeLayer + i) % layerCount, color(255 - (255 / (trace - 1) * i)));
+    }
     
-    lastLayer = activeLayer;
     activeLayer += addValue;
     
     if(activeLayer < 0)
@@ -36,7 +38,7 @@ class WavingPatternScene extends Scene
     for (int j = 0; j < tubes.size(); j++)
     {
       Tube t =  tubes.get(j);
-      t.leds.get(layer).c.fade(c, fadeValue);
+      t.leds.get(layer).c.fadeB(brightness(c), fadeValue);
     }
   }
 }

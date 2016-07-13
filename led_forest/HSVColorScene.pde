@@ -1,6 +1,7 @@
 class HSVColorScene extends Scene
 {
   int h = 0;
+  float fadeSpeed = 0.02;
 
   public void update()
   {
@@ -8,16 +9,19 @@ class HSVColorScene extends Scene
     if (frameCount % 60 != 0)
       return;
 
+    // iterate over every led
     for (int j = 0; j < tubes.size(); j++)
     {
       Tube t =  tubes.get(j);
       for (int i = 0; i < t.leds.size(); i++)
       {
-        color c = color(h, 4 * i, 100);
-        t.leds.get(i).c.fade(c, 0.01);
+        LED led = t.leds.get(i);
+        led.c.fadeH(h, fadeSpeed);
+        led.c.fadeS(100 - (4*i), fadeSpeed);
       }
     }
-    
+
+    // update colorwheel
     h = h > 360 ? 0 : h + 20;
   }
 }
