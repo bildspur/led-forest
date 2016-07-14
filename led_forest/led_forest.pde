@@ -60,6 +60,7 @@ void draw()
   if (drawMode == 3)
   {
     visualizer.render3d();
+    visualizeLeapMotion();
   } else
   {
     visualizer.render2d();

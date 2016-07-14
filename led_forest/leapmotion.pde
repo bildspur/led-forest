@@ -24,3 +24,18 @@ void onFrame(final Controller controller)
     frame = controller.frame();
   }
 }
+
+void visualizeLeapMotion()
+{
+  if (frame.hands().count() > 0)
+  {
+    Hand h = frame.hands().get(0);
+    Vector v = h.palmPosition();
+    pushMatrix();
+    translate(v.getX(), -v.getY() + 100, v.getZ());
+    noStroke();
+    fill(255);
+    box(50, 50, 50);
+    popMatrix();
+  }
+}
