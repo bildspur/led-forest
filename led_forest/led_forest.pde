@@ -43,7 +43,9 @@ void setup()
   colorScenes.add(new HSVColorScene());
 
   patternScenes = new ArrayList<Scene>();
-  patternScenes.add(new WavingPatternScene());
+  //patternScenes.add(new FallingTraceScene());
+  patternScenes.add(new WaveStarsPattern());
+  patternScenes.get(0).init();
 }
 
 void draw()

@@ -1,4 +1,4 @@
-class WavingPatternScene extends Scene
+class FallingTraceScene extends Scene
 {
   int layerCount = 24;
   int activeLayer = 23;
