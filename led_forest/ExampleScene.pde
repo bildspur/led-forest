@@ -5,7 +5,7 @@ class ExampleScene extends Scene
   // 0.5 => in 2 frames
   // 0.25 => in 4 frames
   // Formel: 1 / fadeSpeed = frames bis zur totalen Änderung.
-  float fadeSpeed = 0.01666; // 60 frames
+  float fadeSpeed = secondsToEasing(1); // 60 frames
   
   // Hue Wert, den wir speichern. Diesen passen wir bei jedem Update an.
   int h = 0;
@@ -19,7 +19,7 @@ class ExampleScene extends Scene
     // % bedeuted Modulo und gibt den Rest einer Division zurück. Somit wird immer dann ein update gemacht,
     // wenn die frameCount Zahl / 60 den Rest 0 ergiebt (also durch 60 teilbar ist). Somit wird nur jede Sekunde
     // ein update gemacht.
-    if (frameCount % 60 != 0)
+    if (frameCount % secondsToFrames(1) != 0)
       return; // beendet die Momentane Funktion
 
     // Der Folgende Teil wird nur jede Sekunde ausgeführt:

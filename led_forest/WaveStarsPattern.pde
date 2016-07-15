@@ -1,6 +1,6 @@
 class WaveStarsPattern extends Scene
 {
-  float fadeValue = 0.3;
+  float fadeValue = secondsToEasing(0.8);
 
   //vars
   int orbitRadius = 50; // 100 is max
@@ -21,7 +21,7 @@ class WaveStarsPattern extends Scene
 
   public void update()
   {
-    if (frameCount % 5 != 0)
+    if (frameCount % secondsToFrames(0.1) != 0)
       return;
 
     // change strength every 5 seconds

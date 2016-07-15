@@ -1,6 +1,6 @@
 class LeapMotionScene extends Scene
 {
-  float fadeSpeed = 0.01666; // 60 frames
+  float fadeSpeed = secondsToEasing(1); // 60 frames
   int h = 0;
   
   public void init()

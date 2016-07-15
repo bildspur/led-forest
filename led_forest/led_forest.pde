@@ -9,6 +9,8 @@ int currentPatternScene = 0;
 
 int drawMode = 3;
 
+int defaultFrameRate = 40;
+
 void settings()
 {
   size(640, 480, P3D);
@@ -25,7 +27,7 @@ void setup()
   // settings
   //fullScreen();
   ellipseMode(CENTER);
-  frameRate(60);
+  frameRate(defaultFrameRate);
   colorMode(HSB, 360, 100, 100);
 
   // setup tubes
@@ -42,7 +44,8 @@ void setup()
   // color Scenes and Patterns
   colorScenes = new ArrayList<Scene>();
   colorScenes.add(new ExampleScene());
-  colorScenes.add(new HSVColorScene());
+  colorScenes.get(0).init();
+  //colorScenes.add(new HSVColorScene());
 
   patternScenes = new ArrayList<Scene>();
   //patternScenes.add(new FallingTraceScene());
@@ -74,9 +77,7 @@ void draw()
     image(output2d, 0, 0);
     cam.endHUD();
   }
-
-  //sendScreenToSyphon();
-
+  
   // hud
   cam.beginHUD();
   fill(255);
@@ -143,7 +144,7 @@ void keyPressed() {
     color c = color(random(0, 360), random(0, 100), random(0, 100));
     for (int i = 0; i < tubes.get(0).leds.size(); i++)
     {
-      tubes.get(0).leds.get(i).c.fade(c, 0.05);
+      tubes.get(0).leds.get(i).c.fade(c, secondsToEasing(0.3));
     }
     break;
 
@@ -154,6 +155,16 @@ void keyPressed() {
   default:
     println("Key: " + key);
   }
+}
+
+float secondsToEasing(float seconds)
+{
+   return 1.0 / (seconds * defaultFrameRate);
+}
+
+int secondsToFrames(float seconds)
+{
+   return (int)(seconds * defaultFrameRate);
 }
 
 

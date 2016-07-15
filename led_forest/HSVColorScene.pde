@@ -1,12 +1,12 @@
 class HSVColorScene extends Scene
 {
   int h = 0;
-  float fadeSpeed = 0.02;
+  float fadeSpeed = secondsToEasing(0.8);
 
   public void update()
   {
     // do something every second
-    if (frameCount % 60 != 0)
+    if (frameCount % secondsToFrames(1) != 0)
       return;
 
     // iterate over every led

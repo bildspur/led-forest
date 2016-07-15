@@ -6,12 +6,12 @@ class FallingTraceScene extends Scene
   
   int trace = 15;
   
-  float fadeValue = 0.3;
+  float fadeValue = secondsToEasing(0.05);
 
   public void update()
   {
     // do something every second
-    if (frameCount % 5 != 0)
+    if (frameCount % secondsToFrames(0.1) != 0)
       return;
     
     for(int i = 0; i < trace; i++)
