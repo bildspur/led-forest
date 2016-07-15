@@ -36,21 +36,24 @@ PVector normPVector(Vector v)
 PVector intBoxVector(Vector v)
 {
   PVector nv = normPVector(v);
-  return new PVector(interactionBox.x * nv.x, 
+  PVector ibv = new PVector(interactionBox.x * nv.x, 
     interactionBox.y * nv.y, 
     interactionBox.z * nv.z);
+
+  PVector hbox = PVector.mult(interactionBox, 0.5);
+  return new PVector(ibv.x - hbox.x, -1 * (ibv.y - hbox.y), ibv.z - hbox.z);
 }
 
 void visualizeLeapMotion()
 {
-  // test
+  // Interaction box visualisation
   pushMatrix();
-  //translate(v.getX(), -v.getY() + 100, v.getZ());
   stroke(255);
   noFill();
   box(interactionBox.x, interactionBox.y, interactionBox.z);
   popMatrix();
 
+  // Hand Visualisation
   if (frame != null)
   {
     if (frame.hands().count() > 0)
@@ -59,11 +62,10 @@ void visualizeLeapMotion()
       Vector v = h.palmPosition();
       pushMatrix();
       PVector ibv = intBoxVector(v);
-      PVector hbox = PVector.mult(interactionBox, 0.5);
-      translate(ibv.x - hbox.x, -1 * (ibv.y - hbox.y), ibv.z - hbox.z);
+      translate(ibv.x, ibv.y, ibv.z);
       noStroke();
-      fill(255);
-      box(15, 15, 15);
+      fill(255, 100);
+      sphere(15);
       popMatrix();
     }
   }

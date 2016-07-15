@@ -2,6 +2,11 @@ class LeapMotionScene extends Scene
 {
   float fadeSpeed = 0.01666; // 60 frames
   int h = 0;
+  
+  public void init()
+  {
+      setColor(color(0), 0.002);
+  }
 
   public void update()
   {

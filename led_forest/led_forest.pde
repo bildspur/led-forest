@@ -12,16 +12,18 @@ int drawMode = 3;
 void settings()
 {
   size(640, 480, P3D);
+  //fullScreen(P3D);
   PJOGL.profile = 1;
 }
 
 void setup()
-{
+{ 
   setupSyphon();
   setupLeapMotion();
   setupPeasy();
 
   // settings
+  //fullScreen();
   ellipseMode(CENTER);
   frameRate(60);
   colorMode(HSB, 360, 100, 100);
@@ -58,6 +60,9 @@ void draw()
 
   updateLEDs();
 
+  // calculate syphon ouput
+  PGraphics output2d = visualizer.render2d();
+  sendImageToSyphon(output2d);
 
   if (drawMode == 3)
   {
@@ -65,10 +70,12 @@ void draw()
     visualizeLeapMotion();
   } else
   {
-    visualizer.render2d();
+    cam.beginHUD();
+    image(output2d, 0, 0);
+    cam.endHUD();
   }
 
-  sendImageToSyphon();
+  //sendScreenToSyphon();
 
   // hud
   cam.beginHUD();
@@ -149,15 +156,22 @@ void keyPressed() {
   }
 }
 
-void setRandomColor()
+
+void setColor(color c, float fadeTime)
 {
-  color c = color(random(0, 360), random(0, 100), random(0, 100));
-  println("Random Color: " + hue(c) + ", " + saturation(c) + ", " + brightness(c));
+  println("Setting Color: " + hue(c) + ", " + saturation(c) + ", " + brightness(c));
   for (int j = 0; j < tubes.size(); j++)
   {
     for (int i = 0; i < tubes.get(j).leds.size(); i++)
     {
-      tubes.get(j).leds.get(i).c.fade(c, 0.01);
+      tubes.get(j).leds.get(i).c.fade(c, fadeTime);
     }
   }
+}
+
+
+void setRandomColor(float fadeTime)
+{
+  color c = color(random(0, 360), random(0, 100), random(0, 100));
+  setColor(c, fadeTime);
 }
