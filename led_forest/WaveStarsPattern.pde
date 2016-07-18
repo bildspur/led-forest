@@ -10,6 +10,11 @@ class WaveStarsPattern extends Scene
 
   float speed = 1;
 
+  public String getName()
+  {
+     return "Wave Stars Scene"; 
+  }
+
   public void init()
   {
       waveStrengthHorizontal = (int)random(0, 20);

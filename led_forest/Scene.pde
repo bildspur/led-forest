@@ -1,6 +1,11 @@
 abstract class Scene
 {
 
+  public String getName()
+  {
+     return "Unnamed Scene"; 
+  }
+  
   // will be called when the scene gets enabled
   public void init()
   {

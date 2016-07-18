@@ -2,6 +2,11 @@ class HSVColorScene extends Scene
 {
   int h = 0;
   float fadeSpeed = secondsToEasing(0.8);
+  
+  public String getName()
+  {
+     return "HSV Color Scene"; 
+  }
 
   public void update()
   {

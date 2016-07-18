@@ -54,19 +54,21 @@ void visualizeLeapMotion()
   popMatrix();
 
   // Hand Visualisation
-  if (frame != null)
+  if (isLeapMotionHandAvailable())
   {
-    if (frame.hands().count() > 0)
-    {
-      Hand h = frame.hands().get(0);
-      Vector v = h.palmPosition();
-      pushMatrix();
-      PVector ibv = intBoxVector(v);
-      translate(ibv.x, ibv.y, ibv.z);
-      noStroke();
-      fill(255, 100);
-      sphere(15);
-      popMatrix();
-    }
+    Hand h = frame.hands().get(0);
+    Vector v = h.palmPosition();
+    pushMatrix();
+    PVector ibv = intBoxVector(v);
+    translate(ibv.x, ibv.y, ibv.z);
+    noStroke();
+    fill(255, 100);
+    sphere(15);
+    popMatrix();
   }
+}
+
+boolean isLeapMotionHandAvailable()
+{
+  return (frame != null && frame.hands().count() > 0);
 }

@@ -3,6 +3,7 @@ class TubeVisualizer
   int rodColumnCount = 4;
   int rodRowCount = 4;
 
+  // 3d vars
   float rodSpaceDistance = 50;
 
   ArrayList<Rod> rods;

@@ -1,15 +1,13 @@
 ArrayList<Tube> tubes; //<>//
 TubeVisualizer visualizer;
 
-ArrayList<Scene> colorScenes;
-ArrayList<Scene> patternScenes;
-
-int currentColorScene = 0;
-int currentPatternScene = 0;
+SceneManager sceneManager;
 
 int drawMode = 3;
 
 int defaultFrameRate = 40;
+
+boolean showInfo = true;
 
 void settings()
 {
@@ -41,16 +39,17 @@ void setup()
   visualizer = new TubeVisualizer();
   visualizer.initRods(tubes);
 
-  // color Scenes and Patterns
-  colorScenes = new ArrayList<Scene>();
-  colorScenes.add(new ExampleScene());
-  colorScenes.get(0).init();
-  //colorScenes.add(new HSVColorScene());
+  // scenes
+  sceneManager = new SceneManager();
 
-  patternScenes = new ArrayList<Scene>();
-  //patternScenes.add(new FallingTraceScene());
-  patternScenes.add(new WaveStarsPattern());
-  patternScenes.get(0).init();
+  // color Scenes
+  sceneManager.colorScenes.add(new ExampleScene());
+  sceneManager.colorScenes.add(new HSVColorScene());
+
+  sceneManager.patternScenes.add(new FallingTraceScene());
+  sceneManager.patternScenes.add(new WaveStarsPattern());
+
+  sceneManager.init();
 }
 
 void draw()
@@ -58,8 +57,7 @@ void draw()
   background(0);
 
   // scenes
-  colorScenes.get(currentColorScene).update();
-  patternScenes.get(currentPatternScene).update();
+  sceneManager.update();
 
   updateLEDs();
 
@@ -77,14 +75,19 @@ void draw()
     image(output2d, 0, 0);
     cam.endHUD();
   }
-  
+
   // hud
-  cam.beginHUD();
-  fill(255);
-  textSize(12);
-  text("Draw Mode: " + drawMode + "D", 5, 15);
-  text("FPS: " + round(frameRate), 5, 30);
-  cam.endHUD();
+  if (showInfo)
+  {
+    cam.beginHUD();
+    fill(255);
+    textSize(12);
+    text("Draw Mode: " + drawMode + "D", 5, 15);
+    text("FPS: " + round(frameRate), 5, 30);
+    text("Color Scene: " + sceneManager.getActiveColorScene().getName(), 150, 15);
+    text("Pattern Scene: " + sceneManager.getActivePatternScene().getName(), 150, 30);
+    cam.endHUD();
+  }
 }
 
 void updateLEDs()
@@ -149,7 +152,15 @@ void keyPressed() {
     break;
 
   case 'c':
-    currentColorScene = 0;
+    sceneManager.nextColorScene();
+    break;
+
+  case 'p':
+    sceneManager.nextPatternScene();
+    break;
+
+  case 'i':
+    showInfo = !showInfo;
     break;
 
   default:
@@ -159,12 +170,12 @@ void keyPressed() {
 
 float secondsToEasing(float seconds)
 {
-   return 1.0 / (seconds * defaultFrameRate);
+  return 1.0 / (seconds * defaultFrameRate);
 }
 
 int secondsToFrames(float seconds)
 {
-   return (int)(seconds * defaultFrameRate);
+  return (int)(seconds * defaultFrameRate);
 }
 
 

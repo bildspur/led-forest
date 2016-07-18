@@ -3,6 +3,11 @@ class LeapMotionScene extends Scene
   float fadeSpeed = secondsToEasing(1); // 60 frames
   int h = 0;
   
+  public String getName()
+  {
+     return "LeapMotion Scene"; 
+  }
+  
   public void init()
   {
       setColor(color(0), 0.002);

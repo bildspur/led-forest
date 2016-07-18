@@ -9,6 +9,11 @@ class ExampleScene extends Scene
   
   // Hue Wert, den wir speichern. Diesen passen wir bei jedem Update an.
   int h = 0;
+  
+  public String getName()
+  {
+     return "Example Scene"; 
+  }
 
   /* 
    * Update wird 60 Mal in der Sekunde aufgerufen.
