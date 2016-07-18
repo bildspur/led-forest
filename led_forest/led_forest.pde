@@ -46,6 +46,7 @@ void setup()
   sceneManager.colorScenes.add(new ExampleScene());
   sceneManager.colorScenes.add(new HSVColorScene());
 
+  sceneManager.patternScenes.add(new StarPatternScene());
   sceneManager.patternScenes.add(new FallingTraceScene());
   sceneManager.patternScenes.add(new WaveStarsPattern());
 
@@ -79,6 +80,22 @@ void draw()
   // hud
   if (showInfo)
   {
+    if (drawMode == 3)
+    {
+      // draw stub info
+      fill(255);
+      textSize(12);
+
+      for (int i = 0; i < visualizer.rods.size(); i++)
+      {
+        pushMatrix();
+        Rod r = visualizer.rods.get(i);
+        translate(r.p.x, 0, r.p.z);
+        text(r.tube.universe + "|" + i, 0, 0);
+        popMatrix();
+      }
+    }
+
     cam.beginHUD();
     fill(255);
     textSize(12);
@@ -163,6 +180,19 @@ void keyPressed() {
     showInfo = !showInfo;
     break;
 
+  case 'm':
+    sceneManager.running = !sceneManager.running;
+    setColor(color(100, 100, 100), 1);
+    break;
+
+  case 'z':
+    // set color for led 0
+    for (int j = 0; j < tubes.size(); j++)
+    {
+      tubes.get(j).leds.get(0).c.fade(color(255), secondsToEasing(0.5));
+    }
+    break;
+
   default:
     println("Key: " + key);
   }
@@ -176,24 +206,4 @@ float secondsToEasing(float seconds)
 int secondsToFrames(float seconds)
 {
   return (int)(seconds * defaultFrameRate);
-}
-
-
-void setColor(color c, float fadeTime)
-{
-  println("Setting Color: " + hue(c) + ", " + saturation(c) + ", " + brightness(c));
-  for (int j = 0; j < tubes.size(); j++)
-  {
-    for (int i = 0; i < tubes.get(j).leds.size(); i++)
-    {
-      tubes.get(j).leds.get(i).c.fade(c, fadeTime);
-    }
-  }
-}
-
-
-void setRandomColor(float fadeTime)
-{
-  color c = color(random(0, 360), random(0, 100), random(0, 100));
-  setColor(c, fadeTime);
 }

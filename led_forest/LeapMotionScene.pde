@@ -10,15 +10,7 @@ class LeapMotionScene extends Scene
 
   public void init()
   {
-    for (int j = 0; j < tubes.size(); j++)
-    {
-      Tube t =  tubes.get(j);
-      for (int i = 0; i < t.leds.size(); i++)
-      {
-        LED led = t.leds.get(i);
-        led.c.fadeS(0, fadeSpeed);
-      }
-    }
+    setColorS(0, fadeSpeed);
   }
 
   public void update()
@@ -26,6 +18,9 @@ class LeapMotionScene extends Scene
     Hand h = frame.hands().get(0);
     Vector v = h.palmPosition();
     PVector palmPosition = intBoxVector(v);
+    
+    // strength affects saturation
+    setColorS(h.grabStrength() * 100, secondsToEasing(0.5));
 
     for (int j = 0; j < tubes.size(); j++)
     {

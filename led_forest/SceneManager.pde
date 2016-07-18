@@ -20,6 +20,8 @@ public class SceneManager extends Scene
   boolean transitionMode = false;
   boolean normalMode = true;
 
+  boolean running = true;
+
   Scene leapMotionScene = new LeapMotionScene();
 
   public SceneManager()
@@ -60,13 +62,17 @@ public class SceneManager extends Scene
 
   public void update()
   {
+    // do nothing if not running
+    if (!running)
+      return;
+
     boolean isLeapAv = isLeapMotionHandAvailable();
 
     // go to leapmotion mode
     if (isLeapAv && !transitionMode && normalMode)
     {
       println("switching to leapmotion mode");
-      
+
       transitionMode = true;
       sceneTimer = leapMotionTransitionTime;
       setColor(0, secondsToEasing(transitionTime));
