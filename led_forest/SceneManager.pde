@@ -32,6 +32,8 @@ public class SceneManager extends Scene
 
   public void init()
   {
+    getActiveColorScene().init();
+    getActivePatternScene().init();
   }
 
   public void nextColorScene()
