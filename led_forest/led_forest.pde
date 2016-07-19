@@ -42,11 +42,13 @@ void setup()
   // scenes
   sceneManager = new SceneManager();
 
-  // color Scenes
-  //sceneManager.colorScenes.add(new WhiteColorScene());
+  // color scenes
+  sceneManager.colorScenes.add(new WhiteColorScene());
   sceneManager.colorScenes.add(new ExampleScene());
   sceneManager.colorScenes.add(new HSVColorScene());
 
+  // pattern scenes
+  sceneManager.patternScenes.add(new FloatingPatternScene());
   sceneManager.patternScenes.add(new StarPatternScene());
   sceneManager.patternScenes.add(new FallingTraceScene());
   sceneManager.patternScenes.add(new WaveStarsPattern());
