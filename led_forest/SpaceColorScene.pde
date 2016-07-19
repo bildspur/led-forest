@@ -1,11 +1,11 @@
-class HSVColorScene extends Scene
+class SpaceColorScene extends Scene
 {
   int h = 0;
   float fadeSpeed = secondsToEasing(0.8);
 
   public String getName()
   {
-    return "HSV Color Scene";
+    return "Space Color Scene";
   }
   public void init() {
   }
@@ -28,6 +28,6 @@ class HSVColorScene extends Scene
     }
 
     // update colorwheel
-    h = (h + 20) % 361;
+    h = (h + 100) % 361;
   }
 }

@@ -43,6 +43,7 @@ void setup()
   sceneManager = new SceneManager();
 
   // color scenes
+  sceneManager.colorScenes.add(new SpaceColorScene());
   sceneManager.colorScenes.add(new SingleColorScene());
   sceneManager.colorScenes.add(new WhiteColorScene());
   sceneManager.colorScenes.add(new ExampleScene());
