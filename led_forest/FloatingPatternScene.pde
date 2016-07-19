@@ -72,7 +72,7 @@ class FloatingPatternScene extends Scene
         f = (f-h)/10;
 
         velMap[x][y] -= f;
-        velMap[x][y] *= 0.96; //0.95;
+        velMap[x][y] *= 0.95; //0.95;
 
         heightMap[x][y]-=velMap[x][y];
       }
