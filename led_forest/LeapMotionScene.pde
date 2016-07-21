@@ -1,7 +1,7 @@
 class LeapMotionScene extends Scene
 {
   float fadeSpeed = secondsToEasing(0.5); // 60 frames$
-  float interactionRadius = 50;
+  float interactionRadius = 75;
 
   int hue = 0;
 
@@ -20,6 +20,8 @@ class LeapMotionScene extends Scene
     Hand h = frame.hands().get(0);
     Vector v = h.palmPosition();
     PVector palmPosition = intBoxVector(v);
+    
+    interactionRadius = map(palmPosition.y * -1, 0, interactionBox.y / 2, 50, 300);
 
     // strength affects saturation
     setColorS(h.grabStrength() * 100, secondsToEasing(0.5));
