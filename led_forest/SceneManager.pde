@@ -23,6 +23,7 @@ public class SceneManager extends Scene
   boolean running = true;
 
   Scene leapMotionScene = new LeapMotionScene();
+  Scene tutorialScene = new TutorialScene();
 
   public SceneManager()
   {
@@ -78,6 +79,9 @@ public class SceneManager extends Scene
       transitionMode = true;
       sceneTimer = leapMotionTransitionTime;
       setColor(0, secondsToEasing(transitionTime));
+      
+      leapMotionScene.init();
+      tutorialScene.init();
     }
 
     // after transition
@@ -87,6 +91,12 @@ public class SceneManager extends Scene
       normalMode = false;
       transitionMode = false;
       leapMotionScene.init();
+    }
+    
+    //during transition
+    if(transitionMode && sceneTimer > 0)
+    {
+       tutorialScene.update(); 
     }
 
     // decrease idle time
