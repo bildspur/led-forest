@@ -3,6 +3,8 @@ class LeapMotionScene extends Scene
   float fadeSpeed = secondsToEasing(0.5); // 60 frames$
   float interactionRadius = 50;
 
+  int hue = 0;
+
   public String getName()
   {
     return "LeapMotion Scene";
@@ -18,9 +20,10 @@ class LeapMotionScene extends Scene
     Hand h = frame.hands().get(0);
     Vector v = h.palmPosition();
     PVector palmPosition = intBoxVector(v);
-    
+
     // strength affects saturation
     setColorS(h.grabStrength() * 100, secondsToEasing(0.5));
+    setColorH(hue, secondsToEasing(0.5));
 
     for (int j = 0; j < tubes.size(); j++)
     {
@@ -37,6 +40,9 @@ class LeapMotionScene extends Scene
           led.c.fadeB(0, fadeSpeed);
       }
     }
+
+    if (frameCount % secondsToFrames(1) == 0)
+      hue = (hue + 1) % 360;
   }
 
   public PVector ledPosition(int rodIndex, int ledIndex)

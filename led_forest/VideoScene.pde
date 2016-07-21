@@ -81,8 +81,8 @@ class VideoScene extends Scene
 
   void setFixtureSpace(int tubeCount, int ledCount, float w, float h)
   {
-      wspace2d = (w - (tubeCount * width2d)) / tubeCount;
-      hspace2d = (h - (ledCount * height2d)) / ledCount;
+      wspace2d = (w - (tubeCount * width2d + woffset)) / tubeCount;
+      hspace2d = (h - (ledCount * height2d + hoffset)) / ledCount;
       
       isFixtureSpaceSet = true;
   }

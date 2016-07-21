@@ -79,6 +79,9 @@ public class SceneManager extends Scene
     if (isLeapAv && !transitionMode && normalMode)
     {
       println("switching to leapmotion mode");
+      
+      getActiveColorScene().dispose();
+      getActivePatternScene().dispose();
 
       transitionMode = true;
       sceneTimer = leapMotionTransitionTime;

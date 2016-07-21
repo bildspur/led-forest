@@ -8,6 +8,10 @@ private final Object lock = new Object();
 
 PVector interactionBox = new PVector(180, 180, 180);
 
+PVector handTarget = new PVector();
+PVector handCurrent = new PVector();
+float handEasing = 0.1;
+
 Frame getFrame()
 {
   synchronized (lock) {
@@ -58,11 +62,16 @@ void visualizeLeapMotion()
   {
     Hand h = frame.hands().get(0);
     Vector v = h.palmPosition();
-    pushMatrix();
     PVector ibv = intBoxVector(v);
-    translate(ibv.x, ibv.y, ibv.z);
-    noStroke();
-    fill(255, 100);
+
+    // easing
+    handTarget = ibv;
+    handCurrent.add(PVector.sub(handTarget, handCurrent).mult(handEasing));
+
+    pushMatrix();
+    translate(handCurrent.x, handCurrent.y, handCurrent.z);
+    stroke(255, 100);
+    noFill();
     sphere(15);
     popMatrix();
   }
