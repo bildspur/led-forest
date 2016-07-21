@@ -8,12 +8,16 @@ class VideoScene extends Scene
 
   float wspace2d = 20;
   float hspace2d = 2;
-  float width2d = 15;
-  float height2d = 15;
+  
   float hoffset = 50;
   float woffset = 50;
+  
+  float width2d = 15;
+  float height2d = 15;
 
   Movie activeVideo;
+
+  boolean isFixtureSpaceSet = false;
 
   public boolean isUnique()
   {
@@ -34,6 +38,8 @@ class VideoScene extends Scene
       activeVideoIndex = (activeVideoIndex + 1) % videoFiles.length;
       activeVideo = new Movie(led_forest.this, videoFiles[activeVideoIndex]);
       activeVideo.loop();
+
+      isFixtureSpaceSet = false;
     } else
     {
       activeVideo = null;
@@ -54,6 +60,9 @@ class VideoScene extends Scene
     if (activeVideo == null)
       return;
 
+    if (!isFixtureSpaceSet)
+      setFixtureSpace(tubes.size(), tubes.get(0).leds.size(), activeVideo.width, activeVideo.height);
+
     /*
     cam.beginHUD();
      tint(255, 255);
@@ -70,10 +79,16 @@ class VideoScene extends Scene
     }
   }
 
+  void setFixtureSpace(int tubeCount, int ledCount, float w, float h)
+  {
+      wspace2d = (w - (tubeCount * width2d)) / tubeCount;
+      hspace2d = (h - (ledCount * height2d)) / ledCount;
+      
+      isFixtureSpaceSet = true;
+  }
+
   void setColorForLED(PImage videoFrame, int tubeIndex, int ledIndex)
   {
-    //videoFrame.loadPixels();
-
     // set window
     int x = (int)(ledIndex * (wspace2d + width2d) + woffset);
     int y = (int)(tubeIndex * (hspace2d + height2d) + hoffset);
