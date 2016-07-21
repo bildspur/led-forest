@@ -39,12 +39,16 @@ public class SceneManager extends Scene
 
   public void nextColorScene()
   {
+    getActiveColorScene().dispose();
     currentColorScene = (currentColorScene + 1) % colorScenes.size();
+    getActiveColorScene().init();
   }
 
   public void nextPatternScene()
   {
+    getActivePatternScene().dispose();
     currentPatternScene = (currentPatternScene + 1) % patternScenes.size();
+    getActivePatternScene().init();
   }
 
   public Scene getActiveColorScene()
@@ -79,7 +83,7 @@ public class SceneManager extends Scene
       transitionMode = true;
       sceneTimer = leapMotionTransitionTime;
       setColor(0, secondsToEasing(transitionTime));
-      
+
       leapMotionScene.init();
       tutorialScene.init();
     }
@@ -92,11 +96,11 @@ public class SceneManager extends Scene
       transitionMode = false;
       leapMotionScene.init();
     }
-    
+
     //during transition
-    if(transitionMode && sceneTimer > 0)
+    if (transitionMode && sceneTimer > 0)
     {
-       tutorialScene.update(); 
+      tutorialScene.update();
     }
 
     // decrease idle time
@@ -126,8 +130,15 @@ public class SceneManager extends Scene
     // update in normal mode
     if (normalMode && !transitionMode)
     {
-      colorScenes.get(currentColorScene).update();
-      patternScenes.get(currentPatternScene).update();
+
+      Scene cs = colorScenes.get(currentColorScene);
+      cs.update();
+
+      if (!cs.isUnique())
+      {
+        Scene ps = patternScenes.get(currentPatternScene);
+        ps.update();
+      }
 
       if (frameCount % colorCycle == 0)
         nextColorScene();
