@@ -60,7 +60,7 @@ class ExampleScene extends Scene
     }
     
     // Anpassen des Hue Wert in 50er Schritten:
-    h += 300;
+    h += 50;
     
     // sofern h zu gross wird, müssen wir es wieder auf 0 zurücksetzen.
     if(h > 360)

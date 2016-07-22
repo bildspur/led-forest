@@ -28,6 +28,6 @@ class SpaceColorScene extends Scene
     }
 
     // update colorwheel
-    h = (h + 100) % 361;
+    h = (h + 1) % 361;
   }
 }

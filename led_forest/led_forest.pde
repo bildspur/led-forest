@@ -46,11 +46,12 @@ void setup()
   sceneManager = new SceneManager();
 
   // color scenes
-  sceneManager.colorScenes.add(videoScene);
   sceneManager.colorScenes.add(new SpaceColorScene());
   sceneManager.colorScenes.add(new SingleColorScene());
+  sceneManager.colorScenes.add(videoScene);
   sceneManager.colorScenes.add(new WhiteColorScene());
   sceneManager.colorScenes.add(new ExampleScene());
+  sceneManager.colorScenes.add(videoScene);
   sceneManager.colorScenes.add(new HSVColorScene());
 
   // pattern scenes
@@ -193,15 +194,15 @@ void keyPressed() {
     sceneManager.running = !sceneManager.running;
     setColor(color(100, 100, 100), 1);
     break;
-    
+
   case 'l':
     setColorToWhite();
     break;
-    
+
   case 'v':
-      videoScene.dispose();
-      videoScene.init();
-      break;
+    videoScene.dispose();
+    videoScene.init();
+    break;
 
   case 'z':
     // set color for led 0

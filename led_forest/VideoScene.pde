@@ -57,6 +57,11 @@ class VideoScene extends Scene
   {
     if (frameCount <= 1)
       return;
+    
+    /*
+    if(frameCount % secondsToFrames(0.3) == 0)
+      return;
+    */
 
     if (activeVideo == null)
       return;
@@ -110,7 +115,7 @@ class VideoScene extends Scene
     */
 
     color c = getAverage(videoFrame, x, y, w, h);
-    tubes.get(tubeIndex).leds.get(ledIndex).c.fade(c, 0.8);
+    tubes.get(tubeIndex).leds.get(ledIndex).c.fade(c, 0.5);
   }
 
   color getAverage(PImage img, int x, int y, int w, int h)

@@ -6,7 +6,7 @@ class FallingTraceScene extends Scene
   
   int trace = 15;
   
-  float fadeValue = secondsToEasing(0.05);
+  float fadeValue = secondsToEasing(0.1);
   
   public String getName()
   {

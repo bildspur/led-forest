@@ -8,8 +8,8 @@ public class SceneManager extends Scene
   int currentColorScene = 0;
   int currentPatternScene = 0;
 
-  int colorCycle = secondsToFrames(2*60);
-  int patternCycle = secondsToFrames(60);
+  int colorCycle = secondsToFrames(4*60);
+  int patternCycle = secondsToFrames(2*60);
 
   int leapMotionIdleTime = secondsToFrames(10);
   int leapMotionIdleTimer = leapMotionIdleTime;

@@ -68,8 +68,8 @@ class FloatingPatternScene extends Scene
             }
           }
         }
-        f/=8;
-        f = (f-h)/10;
+        f/=6;
+        f = (f-h)/8;
 
         velMap[x][y] -= f;
         velMap[x][y] *= 0.95; //0.95;
