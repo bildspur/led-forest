@@ -39,6 +39,8 @@ public class SceneManager extends Scene
 
   public void nextColorScene()
   {
+    colorCycle = 0;
+    
     getActiveColorScene().dispose();
     currentColorScene = (currentColorScene + 1) % colorScenes.size();
     getActiveColorScene().init();
@@ -46,6 +48,8 @@ public class SceneManager extends Scene
 
   public void nextPatternScene()
   {
+    patternCycle = 0;
+    
     getActivePatternScene().dispose();
     currentPatternScene = (currentPatternScene + 1) % patternScenes.size();
     getActivePatternScene().init();

@@ -37,7 +37,7 @@ class LeapMotionScene extends Scene
         float distance = ledPosition(j, i).dist(palmPosition);
 
         if (distance < interactionRadius)
-          led.c.fadeB(100, fadeSpeed);
+          led.c.fadeB(map(distance, 0, interactionRadius, 0, 100), fadeSpeed);
         else
           led.c.fadeB(0, fadeSpeed);
       }
