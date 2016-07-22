@@ -8,10 +8,10 @@ class VideoScene extends Scene
 
   float wspace2d = 20;
   float hspace2d = 2;
-  
+
   float hoffset = 50;
   float woffset = 50;
-  
+
   float width2d = 15;
   float height2d = 15;
 
@@ -60,15 +60,8 @@ class VideoScene extends Scene
     if (activeVideo == null)
       return;
 
-    if (!isFixtureSpaceSet)
-      setFixtureSpace(tubes.size(), tubes.get(0).leds.size(), activeVideo.width, activeVideo.height);
-
-    /*
-    cam.beginHUD();
-     tint(255, 255);
-     image(activeVideo, 0, 0);
-     cam.endHUD();
-     */
+    //if (!isFixtureSpaceSet)
+    //  setFixtureSpace(tubes.size(), tubes.get(0).leds.size(), activeVideo.width, activeVideo.height);
 
     for (int j = 0; j < tubes.size(); j++)
     {
@@ -81,17 +74,17 @@ class VideoScene extends Scene
 
   void setFixtureSpace(int tubeCount, int ledCount, float w, float h)
   {
-      wspace2d = (w - (tubeCount * width2d + woffset)) / tubeCount;
-      hspace2d = (h - (ledCount * height2d + hoffset)) / ledCount;
-      
-      isFixtureSpaceSet = true;
+    wspace2d = (w - (tubeCount * width2d + woffset)) / tubeCount;
+    hspace2d = (h - (ledCount * height2d + hoffset)) / ledCount;
+
+    isFixtureSpaceSet = true;
   }
 
   void setColorForLED(PImage videoFrame, int tubeIndex, int ledIndex)
   {
     // set window
-    int x = (int)(ledIndex * (wspace2d + width2d) + woffset);
-    int y = (int)(tubeIndex * (hspace2d + height2d) + hoffset);
+    int x = (int)(tubeIndex * (wspace2d + width2d) + woffset);
+    int y = (int)(ledIndex * (hspace2d + height2d) + hoffset);
     int w = (int)(x + width2d);
     int h = (int)(y + height2d);
 
@@ -111,7 +104,7 @@ class VideoScene extends Scene
     for (int u = x; u < w; u++)
     {
       for (int v = y; v < h; v++)
-      {
+      { 
         color c = img.get(u, v);
         hue += hue(c);
         sat += saturation(c);

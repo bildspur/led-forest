@@ -11,8 +11,8 @@ boolean showInfo = true;
 
 void settings()
 {
-  //size(640, 480, P3D);
-  fullScreen(P3D, 1);
+  size(640, 480, P3D);
+  //fullScreen(P3D, 1);
   PJOGL.profile = 1;
 }
 
