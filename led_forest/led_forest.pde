@@ -9,6 +9,8 @@ int defaultFrameRate = 40;
 
 boolean showInfo = true;
 
+VideoScene videoScene = new VideoScene();
+
 void settings()
 {
   size(640, 480, P3D);
@@ -44,7 +46,7 @@ void setup()
   sceneManager = new SceneManager();
 
   // color scenes
-  sceneManager.colorScenes.add(new VideoScene());
+  sceneManager.colorScenes.add(videoScene);
   sceneManager.colorScenes.add(new SpaceColorScene());
   sceneManager.colorScenes.add(new SingleColorScene());
   sceneManager.colorScenes.add(new WhiteColorScene());
@@ -195,6 +197,11 @@ void keyPressed() {
   case 'l':
     setColorToWhite();
     break;
+    
+  case 'v':
+      videoScene.dispose();
+      videoScene.init();
+      break;
 
   case 'z':
     // set color for led 0
