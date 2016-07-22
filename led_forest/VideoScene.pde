@@ -10,8 +10,8 @@ class VideoScene extends Scene
   float wspace2d = 20;
   float hspace2d = 2;
 
-  float hoffset = 50;
-  float woffset = 50;
+  float hoffset = 100;
+  float woffset = 100;
 
   float width2d = 15;
   float height2d = 15;
@@ -61,8 +61,17 @@ class VideoScene extends Scene
     if (activeVideo == null)
       return;
 
-    //if (!isFixtureSpaceSet)
-    //  setFixtureSpace(tubes.size(), tubes.get(0).leds.size(), activeVideo.width, activeVideo.height);
+    if (!isFixtureSpaceSet)
+      setFixtureSpace(tubes.size(), tubes.get(0).leds.size(), activeVideo.width, activeVideo.height);
+      
+    /*
+    if(drawMode == 3)
+    {
+       cam.beginHUD();
+       image(activeVideo, 0, 0);
+       cam.endHUD();
+    }
+    */
 
     for (int j = 0; j < tubes.size(); j++)
     {
@@ -75,8 +84,8 @@ class VideoScene extends Scene
 
   void setFixtureSpace(int tubeCount, int ledCount, float w, float h)
   {
-    wspace2d = (w - (tubeCount * width2d + woffset)) / tubeCount;
-    hspace2d = (h - (ledCount * height2d + hoffset)) / ledCount;
+    wspace2d = (w - (tubeCount * width2d + (woffset * 2))) / tubeCount;
+    hspace2d = (h - (ledCount * height2d + (hoffset * 2))) / ledCount;
 
     isFixtureSpaceSet = true;
   }
@@ -88,6 +97,17 @@ class VideoScene extends Scene
     int y = (int)(ledIndex * (hspace2d + height2d) + hoffset);
     int w = (int)(x + width2d);
     int h = (int)(y + height2d);
+    
+    /*
+    if(drawMode == 3)
+    {
+       cam.beginHUD();
+       noFill();
+       stroke(120, 100, 100);
+       rect(x, y, w-x, h-y);
+       cam.endHUD();
+    }
+    */
 
     color c = getAverage(videoFrame, x, y, w, h);
     tubes.get(tubeIndex).leds.get(ledIndex).c.fade(c, 0.8);
