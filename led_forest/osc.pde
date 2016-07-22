@@ -49,6 +49,16 @@ void oscEvent(OscMessage msg) {
     }
     break;
 
+
+  case "/forest/black":
+    if (msg.get(0).floatValue() > 0)
+    {
+      println("Blackout Light!");
+      sceneManager.running = !sceneManager.running;
+      setColor(color(100, 100, 0), secondsToEasing(1));
+    }
+    break;
+
   case "/forest/info":
     if (msg.get(0).floatValue() > 0)
     {
@@ -67,6 +77,14 @@ void oscEvent(OscMessage msg) {
     if (msg.get(0).floatValue() > 0)
     {
       drawMode = 3;
+    }
+    break;
+
+  case "/forest/normalmode":
+    if (msg.get(0).floatValue() > 0)
+    {
+      sceneManager.normalMode = true;
+      sceneManager.transitionMode = false;
     }
     break;
   }
