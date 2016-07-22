@@ -1,5 +1,6 @@
-import processing.video.*; //<>// //<>//
+import processing.video.*; //<>//
 import java.io.FilenameFilter;
+import java.util.Arrays;
 
 class VideoScene extends Scene
 {
@@ -118,13 +119,16 @@ class VideoScene extends Scene
   String[] readVideoFiles()
   {
     java.io.File folder = new java.io.File(sketchPath("data"));
-    return folder.list(new FilenameFilter() {
+    String[] files = folder.list(new FilenameFilter() {
       @Override
         public boolean accept(File dir, String name) {
         return name.matches(".*mov");
       }
     }
     );
+
+    Arrays.sort(files);
+    return files;
   }
 }
 
