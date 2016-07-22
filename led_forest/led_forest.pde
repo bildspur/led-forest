@@ -21,6 +21,7 @@ void setup()
   setupSyphon();
   setupLeapMotion();
   setupPeasy();
+  setupOSC();
 
   // settingsi
   //fullScreen();
@@ -189,6 +190,10 @@ void keyPressed() {
   case 'm':
     sceneManager.running = !sceneManager.running;
     setColor(color(100, 100, 100), 1);
+    break;
+    
+  case 'l':
+    setColorToWhite();
     break;
 
   case 'z':

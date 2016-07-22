@@ -50,3 +50,9 @@ void setRandomColor(float fadeTime)
   color c = color(random(0, 360), random(0, 100), random(0, 100));
   setColor(c, fadeTime);
 }
+
+void setColorToWhite()
+{
+  sceneManager.running = !sceneManager.running;
+  setColor(color(100, 0, 100), secondsToEasing(1));
+}
