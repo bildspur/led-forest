@@ -1,6 +1,6 @@
 class StarPatternScene extends Scene
 {
-  float randomOnFactor = 0.99;
+  float randomOnFactor = 0.95;
   float randomOffFactor = 0.8;
 
   public String getName()
