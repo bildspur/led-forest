@@ -1,7 +1,7 @@
 class LeapMotionScene extends Scene
 {
   float fadeSpeed = secondsToEasing(0.5); // 60 frames$
-  float interactionRadius = 75;
+  float interactionRadius = 50;
 
   int hue = 0;
 
@@ -68,7 +68,7 @@ class LeapMotionScene extends Scene
           Hand h = frame.hands().get(nearestHandIndex);
 
           led.c.fadeH(getHueByHand(h), secondsToEasing(0.5));
-          led.c.fadeS(h.grabStrength() * 100, secondsToEasing(0.5));
+          led.c.fadeS(100 - (h.grabStrength() * 100), secondsToEasing(0.5));
           led.c.fadeB(100, fadeSpeed);
         } else
           led.c.fadeB(0, fadeSpeed);
@@ -82,7 +82,7 @@ class LeapMotionScene extends Scene
   float getHueByHand(Hand h)
   {
     float roll = Math.abs(h.palmNormal().roll());
-    return map(roll, 0, 180, 0, 360);
+    return map(roll, 0, PI, 0, 360);
   }
 
   public PVector ledPosition(int rodIndex, int ledIndex)

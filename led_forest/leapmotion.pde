@@ -8,8 +8,13 @@ private final Object lock = new Object();
 
 PVector interactionBox = new PVector(180, 180, 180);
 
-PVector handTarget = new PVector();
-PVector handCurrent = new PVector();
+ArrayList<PVector> handTargets = new ArrayList<PVector>();
+ArrayList<PVector> handCurrents = new ArrayList<PVector>();
+
+int lastHandsCount = -1;
+
+//PVector handTarget = new PVector();
+//PVector handCurrent = new PVector();
 float handEasing = 0.1;
 
 Frame getFrame()
@@ -22,6 +27,12 @@ Frame getFrame()
 void setupLeapMotion()
 {
   leapMotion = new LeapMotion(this);
+  
+  for(int i = 0; i < 10; i++)
+  {
+     handTargets.add(new PVector());
+     handCurrents.add(new PVector()); 
+  }
 }
 
 void onFrame(final Controller controller)
@@ -56,16 +67,29 @@ void visualizeLeapMotion()
   noFill();
   box(interactionBox.x, interactionBox.y, interactionBox.z);
   popMatrix();
+  
+  // Create Targets
+  /*
+  if(lastHandsCount != frame.hands().count())
+  {
+      lastHandsCount = frame.hands().count();
+      
+  }
+  */
 
   // Hand Visualisation
   if (isLeapMotionHandAvailable())
   {
+    int hIndex = 0;
     for (Hand h : frame.hands())
     {
       //Hand h = frame.hands().get(0);
       Vector v = h.palmPosition();
       PVector ibv = intBoxVector(v);
-
+      
+      PVector handCurrent = handCurrents.get(hIndex);
+      PVector handTarget = handTargets.get(hIndex);
+      
       // easing
       handTarget = ibv;
       handCurrent.add(PVector.sub(handTarget, handCurrent).mult(handEasing));
@@ -76,6 +100,8 @@ void visualizeLeapMotion()
       noFill();
       sphere(15);
       popMatrix();
+      
+      hIndex++;
     }
   }
 }

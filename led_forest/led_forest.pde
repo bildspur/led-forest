@@ -1,4 +1,4 @@
-ArrayList<Tube> tubes; //<>// //<>//
+ArrayList<Tube> tubes; //<>//
 TubeVisualizer visualizer;
 
 SceneManager sceneManager;
@@ -13,8 +13,8 @@ VideoScene videoScene = new VideoScene();
 
 void settings()
 {
-  size(640, 480, P3D);
-  //fullScreen(P3D, 1);
+  //size(640, 480, P3D);
+  fullScreen(P3D, 2);
   PJOGL.profile = 1;
 }
 
