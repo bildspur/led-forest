@@ -13,19 +13,28 @@ class LeapMotionScene extends Scene
   public void init()
   {
     setColorS(0, fadeSpeed);
+    setColorH(0, fadeSpeed);
   }
 
   public void update()
   {
-    Hand h = frame.hands().get(0);
-    Vector v = h.palmPosition();
-    PVector palmPosition = intBoxVector(v);
-    
-    interactionRadius = map(palmPosition.y * -1, 0, interactionBox.y / 2, 50, 300);
+    PVector[] palms = new PVector[frame.hands().count()];
+
+    // update palms
+    for (int i = 0; i < palms.length; i++)
+    {
+      Hand h = frame.hands().get(i);
+      Vector v = h.palmPosition();
+      PVector palmPosition = intBoxVector(v);
+      palms[i] = palmPosition;
+    }
+
+    // interactionRadius = map(palmPosition.y * -1, 0, interactionBox.y / 2, 50, 300);
 
     // strength affects saturation
-    setColorS(h.grabStrength() * 100, secondsToEasing(0.5));
-    setColorH(hue, secondsToEasing(0.5));
+    //setColorS(h.grabStrength() * 100, secondsToEasing(0.5));
+
+    //setColorH(hue, secondsToEasing(0.5));
 
     for (int j = 0; j < tubes.size(); j++)
     {
@@ -34,17 +43,46 @@ class LeapMotionScene extends Scene
       {
         LED led = t.leds.get(i);
 
-        float distance = ledPosition(j, i).dist(palmPosition);
+        boolean isOn = false;
+        float minDistance = Float.MAX_VALUE;
+        int nearestHandIndex = 0;
 
-        if (distance < interactionRadius)
-          led.c.fadeB(map(distance, 0, interactionRadius, 0, 100), fadeSpeed);
-        else
+        // check if a palm is nearby
+        for (int p = 0; p < palms.length; p++)
+        {
+          float distance = ledPosition(j, i).dist(palms[p]);
+          if (distance < interactionRadius)
+          {
+            if (minDistance > distance)
+            {
+              minDistance = distance;
+              nearestHandIndex = p;
+            }
+
+            isOn = true;
+          }
+        }
+
+        if (isOn)
+        {
+          Hand h = frame.hands().get(nearestHandIndex);
+
+          led.c.fadeH(getHueByHand(h), secondsToEasing(0.5));
+          led.c.fadeS(h.grabStrength() * 100, secondsToEasing(0.5));
+          led.c.fadeB(100, fadeSpeed);
+        } else
           led.c.fadeB(0, fadeSpeed);
       }
     }
 
     if (frameCount % secondsToFrames(1) == 0)
       hue = (hue + 1) % 360;
+  }
+
+  float getHueByHand(Hand h)
+  {
+    float roll = Math.abs(h.palmNormal().roll());
+    return map(roll, 0, 180, 0, 360);
   }
 
   public PVector ledPosition(int rodIndex, int ledIndex)

@@ -60,20 +60,23 @@ void visualizeLeapMotion()
   // Hand Visualisation
   if (isLeapMotionHandAvailable())
   {
-    Hand h = frame.hands().get(0);
-    Vector v = h.palmPosition();
-    PVector ibv = intBoxVector(v);
+    for (Hand h : frame.hands())
+    {
+      //Hand h = frame.hands().get(0);
+      Vector v = h.palmPosition();
+      PVector ibv = intBoxVector(v);
 
-    // easing
-    handTarget = ibv;
-    handCurrent.add(PVector.sub(handTarget, handCurrent).mult(handEasing));
+      // easing
+      handTarget = ibv;
+      handCurrent.add(PVector.sub(handTarget, handCurrent).mult(handEasing));
 
-    pushMatrix();
-    translate(handCurrent.x, handCurrent.y, handCurrent.z);
-    stroke(255, 100);
-    noFill();
-    sphere(15);
-    popMatrix();
+      pushMatrix();
+      translate(handCurrent.x, handCurrent.y, handCurrent.z);
+      stroke(255, 100);
+      noFill();
+      sphere(15);
+      popMatrix();
+    }
   }
 }
 
