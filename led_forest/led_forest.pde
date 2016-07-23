@@ -87,6 +87,10 @@ void draw()
     cam.endHUD();
   }
 
+  // update osc app
+  if (frameCount % secondsToFrames(1) == 0)
+    updateOSCApp();
+
   // hud
   if (showInfo)
   {
