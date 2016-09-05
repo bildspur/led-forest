@@ -35,7 +35,7 @@ class Rod
       pushMatrix();
       translate(p.x, p.y + (i * ledLength), p.z);
       noStroke();
-      fill(tube.leds.get(tube.leds.size() - 1 - i).c.getColor());
+      fill(tube.leds.get(i).c.getColor());
 
       sh.disableStyle();
       shape(sh);

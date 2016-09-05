@@ -4,7 +4,8 @@ class TubeVisualizer
   public int rodRowCount = 5;
 
   // 3d vars
-  float rodSpaceDistance = 50;
+  float rodSpaceWidthDistance = 40;
+  float rodSpaceDepthDistance = 50;
 
   ArrayList<Rod> rods;
 
@@ -55,16 +56,14 @@ class TubeVisualizer
   {
     rods = new ArrayList<Rod>();
 
-    float deltaX = (rodSpaceDistance * rodRowCount) / 2f - (rodSpaceDistance / 2);
-    float deltaZ = (rodSpaceDistance * rodColumnCount) / 2f - (rodSpaceDistance / 2);
+    float deltaX = (rodSpaceWidthDistance * rodRowCount) / 2f - (rodSpaceWidthDistance / 2);
+    float deltaZ = (rodSpaceDepthDistance * rodColumnCount) / 2f - (rodSpaceDepthDistance / 2);
 
     for (int z = 0; z < rodColumnCount; z++)
     {
       for (int x = 0; x < rodRowCount; x++)
-      {
-        println("creating column: " + z + " row: " + x + "...");
-        
-        PVector pos = new PVector(x * rodSpaceDistance - deltaX, 0, z * rodSpaceDistance - deltaZ);
+      { 
+        PVector pos = new PVector(x * rodSpaceWidthDistance - deltaX, -60, z * rodSpaceDepthDistance - deltaZ);
         rods.add(new Rod(tubes.get((z * rodRowCount) + x), pos));
       }
     }

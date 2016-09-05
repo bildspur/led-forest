@@ -34,8 +34,6 @@ void setup()
   // setup tubes
   visualizer = new TubeVisualizer();
   createTubes(visualizer.rodColumnCount * visualizer.rodRowCount, 24);
-  
-  println("Tubes: " + tubes.size());
 
   // mark some LEDS
   tubes.get(0).leds.get(0).c = new FadeColor(color(255, 0, 0));
