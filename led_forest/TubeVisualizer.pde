@@ -1,7 +1,7 @@
 class TubeVisualizer
 {
-  int rodColumnCount = 4;
-  int rodRowCount = 4;
+  public int rodColumnCount = 3;
+  public int rodRowCount = 5;
 
   // 3d vars
   float rodSpaceDistance = 50;
@@ -62,8 +62,10 @@ class TubeVisualizer
     {
       for (int x = 0; x < rodRowCount; x++)
       {
+        println("creating column: " + z + " row: " + x + "...");
+        
         PVector pos = new PVector(x * rodSpaceDistance - deltaX, 0, z * rodSpaceDistance - deltaZ);
-        rods.add(new Rod(tubes.get((z * rodColumnCount) + x), pos));
+        rods.add(new Rod(tubes.get((z * rodRowCount) + x), pos));
       }
     }
   }

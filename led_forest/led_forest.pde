@@ -13,8 +13,8 @@ VideoScene videoScene = new VideoScene();
 
 void settings()
 {
-  //size(640, 480, P3D);
-  fullScreen(P3D, 2);
+  size(640, 480, P3D);
+  //fullScreen(P3D, 2);
   PJOGL.profile = 1;
 }
 
@@ -32,14 +32,16 @@ void setup()
   colorMode(HSB, 360, 100, 100);
 
   // setup tubes
-  createTubes(16, 24);
+  visualizer = new TubeVisualizer();
+  createTubes(visualizer.rodColumnCount * visualizer.rodRowCount, 24);
+  
+  println("Tubes: " + tubes.size());
 
   // mark some LEDS
   tubes.get(0).leds.get(0).c = new FadeColor(color(255, 0, 0));
   tubes.get(1).leds.get(0).c = new FadeColor(color(0, 255, 0));
 
   // visualizer
-  visualizer = new TubeVisualizer();
   visualizer.initRods(tubes);
 
   // scenes

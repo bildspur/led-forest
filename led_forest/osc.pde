@@ -132,8 +132,10 @@ public void updateOSCApp()
   sendMessage("/forest/info/pattern", sceneManager.getActivePatternScene().getName());
   sendMessage("/forest/info/fps", "FPS: " + round(frameRate));
 
+  /*
   if (frameCount % secondsToFrames(10) == 0)
     sendMessage("/forest/info/cpu", "CPU: " + getCPUTemperature() + "°C");
+  */
 }
 
 public void sendMessage(String address, float value)
