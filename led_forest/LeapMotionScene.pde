@@ -50,7 +50,7 @@ class LeapMotionScene extends Scene
         // check if a palm is nearby
         for (int p = 0; p < palms.length; p++)
         {
-          float distance = ledPosition(j, i).dist(palms[p]);
+          float distance = ledPosition(j, (t.leds.size() - 1 - i)).dist(palms[p]);
           if (distance < interactionRadius)
           {
             if (minDistance > distance)
