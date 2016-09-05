@@ -40,7 +40,7 @@ class TubeVisualizer
 
       for (int j = 0; j < t.leds.size(); j++)
       {
-        LED l = t.leds.get(t.leds.size() - 1 - j);
+        LED l = t.leds.get(j);
         p.fill(l.c.getColor());
         p.rect(i * (wspace2d + width2d) + woffset, 
           j * (hspace2d + height2d) + hoffset, 
