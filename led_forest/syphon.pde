@@ -15,6 +15,7 @@ void sendScreenToSyphon()
 
 void sendImageToSyphon(PGraphics p)
 {
+  /*
   p.loadPixels();
 
   // Flip image back (very bad approach)
@@ -26,4 +27,6 @@ void sendImageToSyphon(PGraphics p)
   }
 
   syphon.sendImage(canvas);
+  */
+  syphon.sendImage(p);
 }

@@ -17,6 +17,13 @@ class TubeVisualizer
   float hoffset = 50;
   float woffset = 50;
 
+  PGraphics output2d;
+
+  public TubeVisualizer()
+  {
+    output2d = createGraphics(640, 480, P2D);
+  }
+
   void render3d()
   {
     for (Rod r : rods)
@@ -27,12 +34,14 @@ class TubeVisualizer
 
   PGraphics render2d()
   {
-    PGraphics p = createGraphics(640, 480);
+    PGraphics p = output2d;
+
     p.beginDraw();
+    p.background(0);
     for (int i = 0; i < rods.size(); i++)
     {
       Tube t = rods.get(i).tube;
-      
+
       p.noStroke();
       p.fill(255);
       p.textSize(12);
@@ -40,7 +49,7 @@ class TubeVisualizer
 
       for (int j = 0; j < t.leds.size(); j++)
       {
-        LED l = t.leds.get(j);
+        LED l = t.leds.get(t.leds.size() - 1 - j);
         p.fill(l.c.getColor());
         p.rect(i * (wspace2d + width2d) + woffset, 
           j * (hspace2d + height2d) + hoffset, 
@@ -48,7 +57,7 @@ class TubeVisualizer
       }
     }
     p.endDraw();
-    
+
     return p;
   }
 
