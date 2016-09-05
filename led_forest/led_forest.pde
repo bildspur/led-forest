@@ -8,6 +8,9 @@ int drawMode = 3;
 int defaultFrameRate = 40;
 
 boolean showInfo = true;
+boolean mappingMode = false;
+
+int markedLEDTube = -1;
 
 VideoScene videoScene = new VideoScene();
 
@@ -195,8 +198,24 @@ void keyPressed() {
     break;
 
   case 'm':
+    mappingMode = !mappingMode;
     sceneManager.running = !sceneManager.running;
     setColor(color(100, 100, 100), 1);
+    break;
+
+  case 'b':
+    for (int j = 0; j < tubes.size(); j++)
+    {
+      markTube(j, color(0, 0, 0));
+    }
+    break;
+
+  case 'n':
+    if (markedLEDTube >= 0)
+      markTube(markedLEDTube, color(0, 0, 0));
+    markedLEDTube = (markedLEDTube + 1) % tubes.size();
+    println("marking tube nr.: " + markedLEDTube);
+    markTube(markedLEDTube, color(0, 100, 100));
     break;
 
   case 'l':
@@ -218,6 +237,14 @@ void keyPressed() {
 
   default:
     println("Key: " + key);
+  }
+}
+
+void markTube(int tubeId, int c)
+{
+  for (int i = 0; i < tubes.get(0).leds.size(); i++)
+  {
+    tubes.get(tubeId).leds.get(i).c.fade(c, secondsToEasing(0.3));
   }
 }
 
