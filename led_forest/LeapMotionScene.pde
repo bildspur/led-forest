@@ -20,6 +20,7 @@ class LeapMotionScene extends Scene
 
   public void init()
   {
+    setColorB(0, fadeSpeed);
     setColorS(0, fadeSpeed);
     setColorH(0, fadeSpeedH);
   }

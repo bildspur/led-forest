@@ -40,7 +40,9 @@ public class NormalMode extends SceneMode
     super.update();
 
     if (isLeapMotionHandAvailable())
+    {
       sceneManager.changeMode(new TutorialMode(sceneManager));
+    }
 
     Scene cs = sceneManager.getActiveColorScene();
     cs.update();
@@ -119,13 +121,17 @@ public class TutorialMode extends SceneMode
     beginFade = secondsToFrames(fadeTime);
 
     tutScene = ((TutorialScene)sceneManager.tutorialScene);
-    setColor(color(0, 0, 0), secondsToEasing(1));
   }
 
   public void update()
   {
     super.update();
     sceneManager.tutorialScene.update();
+
+    // setting color
+    setColorB(0, secondsToEasing(0.5));
+    setColorS(100, secondsToEasing(0.5));
+    setColorH(0, secondsToEasing(0.5));
 
     // do fadeout
     if (sceneManager.leapMotionTransitionTime - timer < beginFade && !tutScene.fade.isRunning())

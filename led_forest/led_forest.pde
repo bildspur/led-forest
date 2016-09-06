@@ -16,8 +16,8 @@ VideoScene videoScene = new VideoScene();
 
 void settings()
 {
-  size(640, 480, P3D);
-  //fullScreen(P3D, 1);
+  //size(640, 480, P3D);
+  fullScreen(P3D, 1);
   PJOGL.profile = 1;
 }
 
@@ -71,7 +71,7 @@ void draw()
   background(0);
 
   // scenes
-  sceneManager.update();
+  //sceneManager.update();
 
   updateLEDs();
 
@@ -89,6 +89,8 @@ void draw()
     image(output2d, 0, 0);
     cam.endHUD();
   }
+  
+  sceneManager.update();
 
   // update osc app
   if (frameCount % secondsToFrames(1) == 0)
