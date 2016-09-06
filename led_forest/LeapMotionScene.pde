@@ -1,6 +1,14 @@
 class LeapMotionScene extends Scene
 {
-  float fadeSpeed = secondsToEasing(0.5); // 60 frames$
+  float fadeSpeed = secondsToEasing(0.5);
+  
+  
+  float fadeSpeedH = secondsToEasing(0.1);
+  float fadeSpeedS = secondsToEasing(0.1);
+  float fadeSpeedBIn = secondsToEasing(0.3);
+  float fadeSpeedBOut = secondsToEasing(0.1);
+  
+  
   float interactionRadius = 50;
 
   int hue = 0;
@@ -13,7 +21,7 @@ class LeapMotionScene extends Scene
   public void init()
   {
     setColorS(0, fadeSpeed);
-    setColorH(0, fadeSpeed);
+    setColorH(0, fadeSpeedH);
   }
 
   public void update()
@@ -67,11 +75,18 @@ class LeapMotionScene extends Scene
         {
           Hand h = frame.hands().get(nearestHandIndex);
 
-          led.c.fadeH(getHueByHand(h), secondsToEasing(0.5));
-          led.c.fadeS(100 - (h.grabStrength() * 100), secondsToEasing(0.5));
-          led.c.fadeB(100, fadeSpeed);
+          led.c.fadeH(getHueByHand(h), fadeSpeedH);
+          led.c.fadeS(100 - (h.grabStrength() * 100), fadeSpeedS);
+          led.c.fadeB(100, fadeSpeedBIn);
         } else
-          led.c.fadeB(0, fadeSpeed);
+        {
+          /*
+          led.c.fadeH(getHueByHand(h), fadeSpeedH);
+          led.c.fadeS(100 - (h.grabStrength() * 100), fadeSpeedS);
+          */
+          //led.c.fadeS(0, fadeSpeedS);
+          led.c.fadeB(0, fadeSpeedBOut);
+        }
       }
     }
 
