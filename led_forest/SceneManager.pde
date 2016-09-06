@@ -25,16 +25,26 @@ public class SceneManager extends Scene
   Scene leapMotionScene = new LeapMotionScene();
   Scene tutorialScene = new TutorialScene();
 
+  SceneMode currentMode;
+
   public SceneManager()
   {
     colorScenes = new ArrayList<Scene>();
     patternScenes = new ArrayList<Scene>();
+
+    currentMode = new NormalMode(this);
   }
 
   public void init()
   {
-    getActiveColorScene().init();
-    getActivePatternScene().init();
+    currentMode.init();
+  }
+
+  public void changeMode(SceneMode newMode)
+  {
+    currentMode.close();
+    currentMode = newMode;
+    currentMode.init();
   }
 
   public void nextColorScene()
@@ -69,91 +79,9 @@ public class SceneManager extends Scene
 
   public void update()
   {
-    // do nothing if not running
     if (!running)
       return;
 
-    boolean isLeapAv = isLeapMotionHandAvailable();
-
-    // go to leapmotion mode
-    if (isLeapAv && !transitionMode && normalMode)
-    {
-      println("switching to leapmotion mode");
-      
-      getActiveColorScene().dispose();
-      getActivePatternScene().dispose();
-
-      transitionMode = true;
-      sceneTimer = leapMotionTransitionTime;
-      setColor(0, secondsToEasing(transitionTime));
-
-      leapMotionScene.init();
-      tutorialScene.init();
-    }
-
-    // after transition
-    if (transitionMode && sceneTimer == 0)
-    {
-      println("switched to leap motion");
-      normalMode = false;
-      transitionMode = false;
-      leapMotionScene.init();
-    }
-
-    //during transition
-    if (transitionMode && sceneTimer > 0)
-    {
-      tutorialScene.update();
-    }
-
-    // decrease idle time
-    if (!isLeapAv && !normalMode)
-    {
-      leapMotionIdleTimer--;
-
-      if (leapMotionIdleTimer == 0)
-      {
-        println("switched to normal");
-        normalMode = true;
-      }
-    }
-
-    // reset idle time
-    if (isLeapAv && !normalMode)
-    {
-      leapMotionIdleTimer = leapMotionIdleTime;
-    }
-
-    // update in leapmotion mode
-    if (!normalMode && !transitionMode)
-    {
-      leapMotionScene.update();
-    }
-
-    // update in normal mode
-    if (normalMode && !transitionMode)
-    {
-
-      Scene cs = colorScenes.get(currentColorScene);
-      cs.update();
-
-      if (!cs.isUnique())
-      {
-        Scene ps = patternScenes.get(currentPatternScene);
-        ps.update();
-      }
-
-      if (frameCount % colorCycle == 0)
-        nextColorScene();
-
-      if (frameCount % patternCycle == 0)
-        nextPatternScene();
-    }
-
-    // decrease scene timer
-    if (sceneTimer > 0)
-    {
-      sceneTimer--;
-    }
+    currentMode.update();
   }
 }

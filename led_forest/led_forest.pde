@@ -7,7 +7,7 @@ int drawMode = 3;
 
 int defaultFrameRate = 40;
 
-boolean showInfo = true;
+boolean showInfo = false;
 boolean mappingMode = false;
 
 int markedLEDTube = -1;

@@ -65,6 +65,7 @@ void visualizeLeapMotion()
   pushMatrix();
   stroke(255);
   noFill();
+  strokeWeight(2);
   box(interactionBox.x, interactionBox.y, interactionBox.z);
   popMatrix();
   
