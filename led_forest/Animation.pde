@@ -58,6 +58,13 @@ public class Animation
         value = start;
         animationTimeCount = 0;
     }
+    
+    public void reverse()
+    {
+      float temp = start;
+      this.start = end;
+      this.end = temp;
+    }
 
     public void stop()
     {

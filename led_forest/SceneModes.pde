@@ -30,7 +30,7 @@ public class NormalMode extends SceneMode
   public void init()
   {
     println("switching to normal mode");
-    
+
     sceneManager.getActiveColorScene().init();
     sceneManager.getActivePatternScene().init();
   }
@@ -115,23 +115,23 @@ public class TutorialMode extends SceneMode
   public void init()
   {
     println("switching to tutorial mode");
-    setColor(0, secondsToEasing(sceneManager.transitionTime));
     sceneManager.tutorialScene.init();
     beginFade = secondsToFrames(fadeTime);
-    
+
     tutScene = ((TutorialScene)sceneManager.tutorialScene);
+    setColor(color(0, 0, 0), secondsToEasing(1));
   }
 
   public void update()
   {
     super.update();
     sceneManager.tutorialScene.update();
-    
+
     // do fadeout
     if (sceneManager.leapMotionTransitionTime - timer < beginFade && !tutScene.fade.isRunning())
     {
       println("start fading..");
-      tutScene.fade = new Animation(fadeTime, 255, 0);
+      tutScene.fade.reverse();
       tutScene.fade.start();
     }
 

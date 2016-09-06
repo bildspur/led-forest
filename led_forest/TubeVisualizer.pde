@@ -6,6 +6,7 @@ class TubeVisualizer
   // 3d vars
   float rodSpaceWidthDistance = 40;
   float rodSpaceDepthDistance = 50;
+  float rodHeight = -40;
 
   ArrayList<Rod> rods;
 
@@ -72,7 +73,7 @@ class TubeVisualizer
     {
       for (int x = 0; x < rodRowCount; x++)
       { 
-        PVector pos = new PVector(x * rodSpaceWidthDistance - deltaX, -60, z * rodSpaceDepthDistance - deltaZ);
+        PVector pos = new PVector(x * rodSpaceWidthDistance - deltaX, rodHeight, z * rodSpaceDepthDistance - deltaZ);
         rods.add(new Rod(tubes.get((z * rodRowCount) + x), pos));
       }
     }

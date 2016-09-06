@@ -17,7 +17,7 @@ VideoScene videoScene = new VideoScene();
 void settings()
 {
   size(640, 480, P3D);
-  //fullScreen(P3D, 2);
+  //fullScreen(P3D, 1);
   PJOGL.profile = 1;
 }
 
