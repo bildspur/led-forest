@@ -7,10 +7,13 @@ int drawMode = 3;
 
 int defaultFrameRate = 40;
 
+boolean showLogo = true;
 boolean showInfo = false;
 boolean mappingMode = false;
 
 int markedLEDTube = -1;
+
+PImage logo;
 
 VideoScene videoScene = new VideoScene();
 
@@ -27,6 +30,9 @@ void setup()
   setupLeapMotion();
   setupPeasy();
   setupOSC();
+
+  // load logo
+  logo = loadImage("images/logotext.png");
 
   // settingsi
   //fullScreen();
@@ -89,7 +95,14 @@ void draw()
     image(output2d, 0, 0);
     cam.endHUD();
   }
-  
+
+  if (showLogo)
+  {
+    cam.beginHUD();
+    image(logo, (width / 2) - (logo.width / 2), height - logo.height - 10);
+    cam.endHUD();
+  }
+
   sceneManager.update();
 
   // update osc app
