@@ -33,6 +33,7 @@ void setup()
 
   // load logo
   logo = loadImage("images/logotext.png");
+  logo.resize(width / 6, 0);
 
   // settingsi
   //fullScreen();
